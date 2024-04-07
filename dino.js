@@ -76,6 +76,9 @@ window.onload = function() {
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
+        alert(`게임 오버! 점수: ${score}`);
+        gameOver = false; // 게임 오버 처리 후 gameOver 변수를 다시 false로 설정
+        location.reload(); // 페이지 새로고침
         return;
     }
     context.clearRect(0, 0, board.width, board.height);
@@ -89,9 +92,11 @@ function update() {
     for (let i = 0; i < cactusArray.length; i++) {
         let cactus = cactusArray[i];
         cactus.x += velocityX;
-        context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
+        if (!gameOver) { // 게임 종료 후에는 장애물을 그리지 않음
+            context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
+        }
 
-        if (detectCollision(dino, cactus)) {
+        if (!gameOver && detectCollision(dino, cactus)) { // 게임 종료 후에는 충돌 검사를 하지 않음
             gameOver = true;
             dinoImg.src = "./img/dino-dead.png";
             dinoImg.onload = function() {
@@ -110,6 +115,7 @@ function update() {
 function moveDino(e) {
     if (gameOver) {
         return;
+       
     }
 
     if ((e.code == "Space" || e.code == "ArrowUp") && dino.y == dinoY) {
