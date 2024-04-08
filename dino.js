@@ -1,4 +1,3 @@
-
 //board
 let board;
 let boardWidth = 750;
@@ -13,10 +12,10 @@ let dinoY = boardHeight - dinoHeight;
 let dinoImg;
 
 let dino = {
-    x : dinoX,
-    y : dinoY,
-    width : dinoWidth,
-    height : dinoHeight
+    x: dinoX,
+    y: dinoY,
+    width: dinoWidth,
+    height: dinoHeight
 }
 
 //cactus
@@ -42,20 +41,22 @@ let gravity = .4;
 let gameOver = false;
 let score = 0;
 
-window.onload = function() {
+let restartBtn;
+
+window.onload = function () {
+    restartBtn = document.getElementById("restartBtn"); // 버튼 요소 찾기
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
 
     context = board.getContext("2d"); //used for drawing on the board
 
-    //draw initial dinosaur
-    // context.fillStyle="green";
-    // context.fillRect(dino.x, dino.y, dino.width, dino.height);
 
+
+    //draw initial dinosaur
     dinoImg = new Image();
     dinoImg.src = "./img/dino.png";
-    dinoImg.onload = function() {
+    dinoImg.onload = function () {
         context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
     }
 
@@ -76,9 +77,14 @@ window.onload = function() {
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
-        alert(`게임 오버! 점수: ${score}`);
-        gameOver = false; // 게임 오버 처리 후 gameOver 변수를 다시 false로 설정
-        location.reload(); // 페이지 새로고침
+    
+        context.clearRect(0, 0, board.width, board.height);
+        context.fillStyle = "black";
+        context.font = "30px Arial";
+        context.fillText("Game Over!", boardWidth / 2 - 80, boardHeight / 2 - 20);
+        context.fillText(`점수: ${score}`, boardWidth / 2 - 60, boardHeight / 2 + 20);
+        restartBtn.style.display = "block"; // 게임이 종료되면 버튼 표시
+
         return;
     }
     context.clearRect(0, 0, board.width, board.height);
@@ -92,22 +98,20 @@ function update() {
     for (let i = 0; i < cactusArray.length; i++) {
         let cactus = cactusArray[i];
         cactus.x += velocityX;
-        if (!gameOver) { // 게임 종료 후에는 장애물을 그리지 않음
-            context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
-        }
+        context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
 
-        if (!gameOver && detectCollision(dino, cactus)) { // 게임 종료 후에는 충돌 검사를 하지 않음
+        if (detectCollision(dino, cactus)) {
             gameOver = true;
             dinoImg.src = "./img/dino-dead.png";
-            dinoImg.onload = function() {
+            dinoImg.onload = function () {
                 context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
             }
         }
     }
 
     //score
-    context.fillStyle="black";
-    context.font="20px courier";
+    context.fillStyle = "black";
+    context.font = "20px courier";
     score++;
     context.fillText(score, 5, 20);
 }
@@ -115,17 +119,12 @@ function update() {
 function moveDino(e) {
     if (gameOver) {
         return;
-       
     }
 
     if ((e.code == "Space" || e.code == "ArrowUp") && dino.y == dinoY) {
         //jump
         velocityY = -10;
     }
-    else if (e.code == "ArrowDown" && dino.y == dinoY) {
-        //duck
-    }
-
 }
 
 function placeCactus() {
@@ -135,10 +134,10 @@ function placeCactus() {
 
     //place cactus
     let cactus = {
-        img : null,
-        x : cactusX,
-        y : cactusY,
-        width : null,
+        img: null,
+        x: cactusX,
+        y: cactusY,
+        width: null,
         height: cactusHeight
     }
 
@@ -167,7 +166,9 @@ function placeCactus() {
 
 function detectCollision(a, b) {
     return a.x < b.x + b.width &&   //a's top left corner doesn't reach b's top right corner
-           a.x + a.width > b.x &&   //a's top right corner passes b's top left corner
-           a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner
-           a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
+        a.x + a.width > b.x &&   //a's top right corner passes b's top left corner
+        a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner
+        a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
 }
+
+
