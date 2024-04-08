@@ -1,12 +1,12 @@
 //board
 let board;
-let boardWidth = 750;
-let boardHeight = 250;
+let boardWidth = 1350;
+let boardHeight = 300;
 let context;
 
 //dino
-let dinoWidth = 88;
-let dinoHeight = 94;
+let dinoWidth = 50;
+let dinoHeight = 50;
 let dinoX = 50;
 let dinoY = boardHeight - dinoHeight;
 let dinoImg;
@@ -21,12 +21,12 @@ let dino = {
 //cactus
 let cactusArray = [];
 
-let cactus1Width = 34;
-let cactus2Width = 69;
-let cactus3Width = 102;
+let cactus1Width = 50;
+let cactus2Width = 100;
+let cactus3Width = 150;
 
-let cactusHeight = 70;
-let cactusX = 700;
+let cactusHeight = 50;
+let cactusX = 1350;
 let cactusY = boardHeight - cactusHeight;
 
 let cactus1Img;
@@ -42,9 +42,12 @@ let gameOver = false;
 let score = 0;
 
 let restartBtn;
+let jumpBtn
 
 window.onload = function () {
     restartBtn = document.getElementById("restartBtn"); // 버튼 요소 찾기
+    jumpBtn = document.getElementById("jumpBtn");
+
     
     board = document.getElementById("board");
     board.height = boardHeight;
@@ -52,23 +55,32 @@ window.onload = function () {
 
     context = board.getContext("2d"); //used for drawing on the board
     restartBtn.addEventListener("click", restartGame);
+    
+
+    jumpBtn.addEventListener("click", function() {
+        if (dino.y == dinoY) {
+            // 점프
+            velocityY = -10;
+        }
+    });
+    
 
 
     //draw initial dinosaur
     dinoImg = new Image();
-    dinoImg.src = "./img/dino.png";
+    dinoImg.src = "./img/cube2.png";
     dinoImg.onload = function () {
         context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
     }
 
     cactus1Img = new Image();
-    cactus1Img.src = "./img/cactus1.png";
+    cactus1Img.src = "./img/spike.png";
 
     cactus2Img = new Image();
-    cactus2Img.src = "./img/cactus2.png";
+    cactus2Img.src = "./img/spike2.png";
 
     cactus3Img = new Image();
-    cactus3Img.src = "./img/cactus3.png";
+    cactus3Img.src = "./img/spike3.png";
 
     requestAnimationFrame(update);
     setInterval(placeCactus, 1000); //1000 milliseconds = 1 second
@@ -85,6 +97,7 @@ function update() {
         context.fillText("Game Over!", boardWidth / 2 - 80, boardHeight / 2 - 20);
         context.fillText(`점수: ${score}`, boardWidth / 2 - 60, boardHeight / 2 + 20);
         restartBtn.style.display = "block"; // 게임이 종료되면 버튼 표시
+        jumpBtn.style.display = "none";
 
         return;
     }
@@ -122,13 +135,13 @@ function update() {
 function restartGame() {
     gameOver = false; // 게임 상태 초기화
     score = 0; // 점수 초기화
-    dinoImg.src = "./img/dino.png"; // 다시 살아난 공룡 이미지로 변경
+    dinoImg.src = "./img/cube2.png"; // 다시 살아난 공룡 이미지로 변경
     dino.y = dinoY; // 공룡 위치 초기화
     velocityY = -10; // 수직 속도 초기화
     cactusArray = []; // 선인장 배열 초기화
     restartBtn.style.display = "none"; // 재시작 버튼 숨기기
+    jumpBtn.style.display = "block";
 }
-
 function moveDino(e) {
     if (gameOver) {
         return;
@@ -139,6 +152,7 @@ function moveDino(e) {
         velocityY = -10;
     }
 }
+
 
 function placeCactus() {
     if (gameOver) {
