@@ -45,12 +45,13 @@ let restartBtn;
 
 window.onload = function () {
     restartBtn = document.getElementById("restartBtn"); // 버튼 요소 찾기
+    
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
 
     context = board.getContext("2d"); //used for drawing on the board
-
+    restartBtn.addEventListener("click", restartGame);
 
 
     //draw initial dinosaur
@@ -89,6 +90,8 @@ function update() {
     }
     context.clearRect(0, 0, board.width, board.height);
 
+    velocityX = -8 - Math.floor(score / 1000);
+
     //dino
     velocityY += gravity;
     dino.y = Math.min(dino.y + velocityY, dinoY); //apply gravity to current dino.y, making sure it doesn't exceed the ground
@@ -114,6 +117,16 @@ function update() {
     context.font = "20px courier";
     score++;
     context.fillText(score, 5, 20);
+}
+
+function restartGame() {
+    gameOver = false; // 게임 상태 초기화
+    score = 0; // 점수 초기화
+    dinoImg.src = "./img/dino.png"; // 다시 살아난 공룡 이미지로 변경
+    dino.y = dinoY; // 공룡 위치 초기화
+    velocityY = -10; // 수직 속도 초기화
+    cactusArray = []; // 선인장 배열 초기화
+    restartBtn.style.display = "none"; // 재시작 버튼 숨기기
 }
 
 function moveDino(e) {
