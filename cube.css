@@ -1,0 +1,110 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    background-color: rgb(39, 39, 39);
+}
+
+#board {
+    position: relative;
+    background-color: rgb(169, 178, 255);
+    border-bottom: 1px solid black;
+    background: url('./img/bg.jpg'); 
+    background-size: cover;
+    
+}
+
+#gameContainer {
+    position: relative;
+    display: inline-block;
+    
+}
+
+#jumpBtn,
+#restartBtn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    height: 30px;
+}
+
+#mobileBtn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 150px;
+    height: 40px;
+    margin: 5px;
+}
+
+.logo_img {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    
+}
+
+#changeBtn {
+    position: absolute;
+    font-size: 16px;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    height: 30px;
+    z-index: 1; /* 다른 요소 위에 표시되도록 설정 */
+}
+
+.pixelify-sans-uniquifier {
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.title {
+    font-size: 60px;
+}
+
+.text1 {
+    font-size: 40px;
+}
+.text12{
+    font-size: 40px;
+}
+
+@media (max-width: 1000px){
+
+    .title {
+        font-size: 30px;
+    }
+
+    .text1 {
+        font-size: 15px;
+    }
+    .text2 {
+        font-size: 15px;
+    }
+    .mobile{
+        display: block;
+    }
+    .pcjump{
+        display: none;
+    }
+    #changeBtn{
+        width: 100px;
+        font-size: 10px;
+    }
+    
+}
+
+@media (min-width: 1001px)
+{
+    .mobilejump{
+        display: none;
+    }
+    .pcjump{
+        display: block;
+    }
+}
+
+

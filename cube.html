@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" , content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="img/thum1.png">
+    <title>cube game</title>
+    <link rel="stylesheet" href="cube.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Pixelify+Sans:wght@400..700&display=swap"
+        rel="stylesheet">
+    <audio id="bgm" autoplay loop>
+        <source src="./img/cetus.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script src="cube.js"></script>
+    <script>
+        var currentUrl = window.location.href;
+        var hiddenUrl = currentUrl.replace('cube.html', 'cube');
+        window.history.pushState({}, document.title, hiddenUrl);
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var bgm = document.getElementById("bgm");
+            
+        });
+    </script>
+
+
+
+</head>
+
+<body>
+    <h1 style="color: white;" class="pixelify-sans-uniquifier title">Cube game</h1>
+    
+
+    <div id="gameContainer">
+
+        <canvas id="board"></canvas>
+        <button id="jumpBtn" class="pixelify-sans-uniquifier pcjump">Jump</button>
+        <button id="restartBtn" class="pixelify-sans-uniquifier" style="display: none;">Restart</button>
+        <!-- Hidden by default -->
+        <button id="changeBtn" class="pixelify-sans-uniquifier"> change theme -> </button>
+    </div>
+    <div>
+        <br><br><br>
+        <p style="color:white;" class="pixelify-sans-uniquifier text1"> press space to jump or click jump button</p>
+        <p style="color:white;" class="pixelify-sans-uniquifier text1"> made by naimnaro</p>
+        <p style="color:white;" class="pixelify-sans-uniquifier text2"> ※ 기기의 CPU 성능에 따라 게임의 속도에 차이가 있을 수 있습니다.</p>
+        <p style="color:white;" class="pixelify-sans-uniquifier text2"> ※ The game speed can be depending on the device's CPU performance</p>
+        <button id="mobileBtn" class="pixelify-sans-uniquifier mobilejump">Jump</button>
+        <br>
+        <a href="https://www.jungpyo.info"><img src="./images/ico1.ico" class="logo_img"></a>
+        <a href="https://github.com/naimnaro"><img src="./images/github2.png" class="logo_img"></a>
+        <a href="https://www.instagram.com/naim_naro"><img src="./images/instagram.png" class="logo_img"></a>
+    </div>
+
+
+
+</body>
+
+</html>
