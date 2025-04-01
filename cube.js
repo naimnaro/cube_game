@@ -153,6 +153,12 @@ window.onload = function () {
        
     });
 
+    document.addEventListener("keydown", function (e) { // 🟦
+        if ((e.code === "Space" || e.code === "ArrowUp") && e.target === document.body) { // 🟦
+            e.preventDefault(); // 기본 동작(스크롤) 방지 // 🟦
+        } // 🟦
+    }); // 🟦
+
 
 
     //draw cube
