@@ -330,3 +330,18 @@ function changeTheme() {
     board.style.backgroundImage = `url('${bgs[skinIndex]}')`;
     context.fillStyle = textcolor[skinIndex];
 }
+
+function getOrCreateUserId() {
+    let userId = localStorage.getItem("userId");
+
+    if (!userId) {
+        // 브라우저에서 지원하는 UUID 생성기
+        userId = crypto.randomUUID(); 
+        localStorage.setItem("userId", userId);
+        console.log("새 UUID 생성:", userId);
+    } else {
+        console.log("기존 UUID 사용:", userId);
+    }
+
+    return userId;
+}
