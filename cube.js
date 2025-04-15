@@ -1,5 +1,18 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA38s8hW788B_GkLB2Jm4xuEA5zti78vUg",
+  authDomain: "gtec-games.firebaseapp.com",
+  projectId: "gtec-games",
+  storageBucket: "gtec-games.firebasestorage.app",
+  messagingSenderId: "1038029814126",
+  appId: "1:1038029814126:web:e29c7c3c14939212a3697f",
+  measurementId: "G-WG6SF19C2E"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 //default screen size
 let board;
 let boardWidth = 1350;
