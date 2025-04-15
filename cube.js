@@ -1,4 +1,5 @@
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 //default screen size
 let board;
 let boardWidth = 1350;
