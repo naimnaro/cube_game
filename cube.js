@@ -105,8 +105,8 @@ let cube = {
 
 window.onload = function () {
     
-    const myId = getOrCreateUserId(); // 여기서 유저 ID 확보
-    console.log("내 UUID:", myId);
+    // const myId = getOrCreateUserId(); // 여기서 유저 ID 확보
+    // console.log("내 UUID:", myId);
 
 
     bgm = document.getElementById("bgm");
@@ -334,7 +334,7 @@ function changeTheme() {
     context.fillStyle = textcolor[skinIndex];
 }
 
-function getOrCreateUserId() {
+  /*function getOrCreateUserId() {
     let userId = localStorage.getItem("userId");
 
     if (!userId) {
@@ -347,4 +347,6 @@ function getOrCreateUserId() {
     }
 
     return userId;
-}
+    
+} */ 
+
